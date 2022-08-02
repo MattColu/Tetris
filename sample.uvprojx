@@ -516,26 +516,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>ADC</GroupName>
-          <Files>
-            <File>
-              <FileName>adc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\adc\adc.h</FilePath>
-            </File>
-            <File>
-              <FileName>IRQ_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\adc\IRQ_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\adc\lib_adc.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>GLCD</GroupName>
           <Files>
             <File>
@@ -571,21 +551,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>TouchPanel</GroupName>
-          <Files>
-            <File>
-              <FileName>TouchPanel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\TouchPanel\TouchPanel.c</FilePath>
-            </File>
-            <File>
-              <FileName>TouchPanel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\TouchPanel\TouchPanel.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>game</GroupName>
           <Files>
             <File>
@@ -617,6 +582,21 @@
               <FileName>BootImage.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\game\BootImage.h</FilePath>
+            </File>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\game\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\game\music.h</FilePath>
+            </File>
+            <File>
+              <FileName>songs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\game\songs.c</FilePath>
             </File>
           </Files>
         </Group>

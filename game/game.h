@@ -18,13 +18,17 @@
 #define TETRA_SIZE 4
 #define PIECE_TYPE_NUMBER 7
 
-#define PAUSE_OPTION_NUMBER 4
+#define PAUSE_OPTION_NUMBER 5
+#define SETTINGS_OPTION_NUMBER 6
 #define MAIN_MENU_OPTION_NUMBER 5
+#define CONTROLS_OPTION_NUMBER 14
+#define CREDITS_OPTION_NUMBER 12
+#define LOBBY_OPTION_NUMBER 8
 
-#define OPTION_STRING_LEN 20
+#define OPTION_STRING_LEN 25
 
 #define CONSOLE_STRING_LEN 27
-#define CONSOLE_LINES 10
+#define CONSOLE_LINES 8
 
 #define MAX_PLAYERS 7
 #define PLAYER_NAME_LEN 11
@@ -47,8 +51,11 @@ typedef enum {
 	LoadingMultiPlayer,
 	MultiPlayer,
 	MultiPlayerGameOver,
+	OpeningSettings,
 	Settings,
+	OpeningControls,
 	Controls,
+	OpeningCredits,
 	Credits,
 } status;
 
@@ -164,6 +171,10 @@ extern uint8_t ghostEnabled;
 
 extern menuEntry pauseOptions[PAUSE_OPTION_NUMBER];
 extern menuEntry mainMenuOptions[MAIN_MENU_OPTION_NUMBER];
+extern menuEntry settingOptions[SETTINGS_OPTION_NUMBER];
+extern menuEntry controlsOptions[CONTROLS_OPTION_NUMBER];
+extern menuEntry creditsOptions[CREDITS_OPTION_NUMBER];
+extern menuEntry lobbyOptions[LOBBY_OPTION_NUMBER];
 
 extern piece currentPiece;
 extern piece ghostPiece;

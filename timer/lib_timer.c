@@ -170,7 +170,9 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 // </h>
 //*** <<< end of configuration section >>>    ***
 
+	NVIC_SetPriority(TIMER0_IRQn, 0);
 	NVIC_EnableIRQ(TIMER0_IRQn);
+	
 	return (1);
   }
   else if ( timer_num == 1 )
@@ -178,6 +180,7 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 	LPC_TIM1->MR0 = TimerInterval;
 	LPC_TIM1->MCR = 3;				/* Interrupt and Reset on MR1 */
 
+	NVIC_SetPriority(TIMER1_IRQn, 1);
 	NVIC_EnableIRQ(TIMER1_IRQn);
 	return (1);
   }
@@ -186,6 +189,7 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 	LPC_TIM2->MR0 = TimerInterval;
 	LPC_TIM2->MCR = 3;				/* Interrupt and Reset on MR1 */
 
+	NVIC_SetPriority(TIMER2_IRQn, 1);
 	NVIC_EnableIRQ(TIMER2_IRQn);
 	return (1);
   }
@@ -194,6 +198,7 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 	LPC_TIM3->MR0 = TimerInterval;
 	LPC_TIM3->MCR = 3;				/* Interrupt and Reset on MR1 */
 
+	NVIC_SetPriority(TIMER3_IRQn, 0);
 	NVIC_EnableIRQ(TIMER3_IRQn);
 	return (1);
   }

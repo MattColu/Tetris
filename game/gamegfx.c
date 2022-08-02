@@ -113,21 +113,55 @@ uint8_t bgShading[BG_NUMBER][BLOCK_SIZE][BLOCK_SIZE] =
 		{3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
 	},
 	{
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
-		{4, 4, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 4, 4},
+		{4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3},
+		{3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3},
+		{3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3},
+		{3, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3},
+		{3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3},
+		{3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+		{3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+		{3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+		{3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+		{4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+	},
+	{
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+		{3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3},
+		{4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4},
+	},
+	{
+		{4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4},
+		{4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4},
+		{4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4},
+		{3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3},
+		{3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3},
+		{3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3},
+		{3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 4, 4, 3, 3},
+		{4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4},
+		{4, 4, 4, 3, 3, 4, 4, 4, 4, 4, 3, 3, 4, 4, 4},
+		{4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 4, 4},
+		{4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 4, 4},
+		{4, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 4},
+		{4, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 4},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
 	},
 };
 
@@ -149,6 +183,9 @@ uint8_t bgPalette;
 uint8_t garbagePalette = 7;
 
 uint8_t frameThickness = 3;
+uint8_t frameBlinkingStatus = 1;
+uint8_t frameBlinkingTimer = 0;
+uint8_t frameBlinkingSpeed = 20;
 
 optioncontrol ValueCtrl = {Value, 56, 16};
 optioncontrol SwatchCtrl = {Swatch, 3 * BLOCK_SIZE, BLOCK_SIZE + 1};
@@ -160,6 +197,10 @@ optioncontrol ButtonCtrl = {Button, 0, 0};
 //offsetXL, offsetXR, offsetYU, offsetYD, *options, optionNumber, selected, highlightSelected, textSize, alignment, style
 choiceScreen pauseMenu = {20, 20, 100, 30, pauseOptions, PAUSE_OPTION_NUMBER, 0, PAUSE_OPTION_NUMBER, 1, AlignLeft, Invert};
 choiceScreen mainMenu = {20, 20, 30, 30, mainMenuOptions, MAIN_MENU_OPTION_NUMBER, 0, MAIN_MENU_OPTION_NUMBER, 2, AlignCenter, Darken};
+choiceScreen creditsMenu = {10, 10, 60, 20, creditsOptions, CREDITS_OPTION_NUMBER, 0, CREDITS_OPTION_NUMBER, 1, AlignCenter, Darken};
+choiceScreen settingsMenu = {20, 20, 100, 30, settingOptions, SETTINGS_OPTION_NUMBER, 0, PAUSE_OPTION_NUMBER, 1, AlignLeft, Invert};
+choiceScreen controlsMenu = {20, 20, 60, 20, controlsOptions, CONTROLS_OPTION_NUMBER, 0, CONTROLS_OPTION_NUMBER, 1, AlignCenter, Darken};
+choiceScreen lobbyMenu = {20, 20, 55, 155, lobbyOptions, LOBBY_OPTION_NUMBER, 0, LOBBY_OPTION_NUMBER, 1, AlignCenter, Darken};
 
 selection theSelection;
 
@@ -335,29 +376,42 @@ void draw_mini_playfield_frame(player *p) {
 	return;
 }
 
+void clear_mini_playfield_frame(player *p) {
+	LCD_DrawHollowRectangle(
+			p->playfieldX,
+			p->playfieldY,
+			p->playfieldSize * PLAYFIELD_X,
+			p->playfieldSize * PLAYFIELD_Y,
+			p->playfieldSize - 1,
+			PaletteArray[p->colorIndex][PALETTE_SIZE-1]);
+	return;
+}
+
 void ko_mini_playfield(player *p) {
 	uint16_t x, y, size;
 	size = p->playfieldSize - 1;
 	x = p->playfieldX + (p->playfieldSize * PLAYFIELD_X)/2 - 8 * size;
 	y = p->playfieldY + (p->playfieldSize * PLAYFIELD_Y)/2 - 8 * size;
-	GUI_ExtraText(x, y, (uint8_t*)"KO", size, White, Black);
+	GUI_LegacyExtraText(x, y, (uint8_t*)"KO", size, White, Black);
 	return;
 }
 
 void draw_background_next (void) {
 	uint8_t i, j;
+	GUI_Text(BLOCK_SIZE * nextX + 7, SCREEN_OFFSET_Y + BLOCK_SIZE * (nextY - 1), (uint8_t *)"NEXT", White, Black);
 	for (i = 0; i < NEXT_BG_SIZE_Y; i++) {
 		for (j = 0; j < NEXT_BG_SIZE_X; j++) {
-			LCD_DrawBlock(/*SCREEN_OFFSET_X*/ + BLOCK_SIZE * nextX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * nextY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
+			LCD_DrawBlock(BLOCK_SIZE * nextX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * nextY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
 		}
 	}
 }
 
 void draw_bagged_next (void) {
 	uint8_t i, j;
+	GUI_Text(BLOCK_SIZE * baggedX + 7, SCREEN_OFFSET_Y + BLOCK_SIZE * (baggedY - 1), (uint8_t *)"HOLD", White, Black);
 	for (i = 0; i < NEXT_BG_SIZE_Y; i++) {
 		for (j = 0; j < NEXT_BG_SIZE_X; j++) {
-			LCD_DrawBlock(/*SCREEN_OFFSET_X*/ + BLOCK_SIZE * baggedX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * baggedY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
+			LCD_DrawBlock(BLOCK_SIZE * baggedX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * baggedY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
 		}
 	}
 }
@@ -375,10 +429,10 @@ void patch_piece(piece *p, piecegameplaytype type, uint8_t force) {
 						LCD_DrawBlock(SCREEN_OFFSET_X + BLOCK_SIZE * p->oldX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * p->oldY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
 					break;
 					case Next:
-						LCD_DrawBlock(/*SCREEN_OFFSET_X*/ + BLOCK_SIZE * nextX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * nextY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
+						LCD_DrawBlock(BLOCK_SIZE * nextX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * nextY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
 					break;
 					case Bagged:
-						LCD_DrawBlock(/*SCREEN_OFFSET_X*/ + BLOCK_SIZE * baggedX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * baggedY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
+						LCD_DrawBlock(BLOCK_SIZE * baggedX + BLOCK_SIZE * j, SCREEN_OFFSET_Y + BLOCK_SIZE * baggedY + BLOCK_SIZE * i, bgShading[bgType], PaletteArray[bgPalette]);
 					break;
 				}
 			}
@@ -395,7 +449,7 @@ void draw_option_screen(choiceScreen *screen) {
 }
 
 void draw_option(choiceScreen *screen, uint8_t i) {
-	uint8_t tstr[8] = "<     >";
+	uint8_t tstr[8] = "\x8C     \x8D";
 	uint8_t j;
 	uint16_t posx, posy, vpadding, ctrlposx;
 	vpadding = (MAX_Y - screen->offsetYU - screen->offsetYD - screen->optionNumber * screen->textSize * 16)/(screen->optionNumber - 1);
@@ -423,9 +477,9 @@ void draw_option(choiceScreen *screen, uint8_t i) {
 		break;
 		case Value:
 			GUI_Text(ctrlposx, posy, tstr, White, Black);
-			sprintf((char *)tstr, "%d", *(uint8_t *)(screen->options[i].option));
-			ctrlposx = MAX_X - screen->offsetXR - 4 * 8 - (strlen((char *)tstr) - 1)/2 * 8;
-			GUI_Text(ctrlposx, posy, tstr, White, Black);
+			sprintf((char *)tstr, " %d ", *(uint8_t *)(screen->options[i].option));
+			ctrlposx = ctrlposx + (8 * (7 - strlen((char *)tstr)))/2;
+			GUI_LegacyText(ctrlposx, posy, tstr, White, Black);
 		break;
 		case Swatch:
 			LCD_DrawRectangle(ctrlposx, posy, screen->options[i].controller->sizeX, screen->options[i].controller->sizeY, PaletteArray[*((uint8_t *)(screen->options[i].option))][PALETTE_SIZE-2]);

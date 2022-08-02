@@ -15,6 +15,7 @@
 #include "../timer/timer.h"
 #include "../TouchPanel/TouchPanel.h"
 #include "../game/game.h"
+#include "../game/music.h"
 #include "../can/s_can.h"
 
 /******************************************************************************
@@ -46,6 +47,7 @@ void RIT_IRQHandler (void)
 			}
 		break;
 		case LoadingMainMenu:
+			start_song(0);
 			reset_selection(&mainMenu);
 			draw_boot_image();
 			draw_option_screen(&mainMenu);
@@ -69,13 +71,17 @@ void RIT_IRQHandler (void)
 			draw_bagged_next();
 			draw_piece(&nextPiece, Next);
 		
+			start_song(musicTheme);
+
 			gameStatus = SinglePlayer;
 		break;
 		case SinglePlayer:
 			game_logic();
 		break;
 		case SinglePlayerGameOver:
-			GUI_ExtraText(20, 20, (uint8_t *)":P", 3, White, Black);
+			start_song(0);
+			GUI_LegacyExtraText(56, 96, (uint8_t *)"GAME", 4, White, Black);
+			GUI_LegacyExtraText(56, 160, (uint8_t *)"OVER", 4, White, Black);
 			switch (inputStatus) {
 				case KEY2:
 				case INT0:
@@ -90,6 +96,8 @@ void RIT_IRQHandler (void)
 		case OpeningLobby:
 			enable_timer(2);
 			LCD_Clear(Black);
+			draw_option_screen(&lobbyMenu);
+			GUI_ExtraText(32, 15, (uint8_t*)"MULTIPLAYER", 2, White, Black);
 			if (boardInfo.CANState == Idle) {
 				boardInfo.CANState = LookForMaster;
 				console_print("Searching for lobbies...");
@@ -144,6 +152,16 @@ void RIT_IRQHandler (void)
 		break;
 		case MultiPlayer:
 			game_logic();
+			if (frameBlinkingTimer >= frameBlinkingSpeed) {
+				if (frameBlinkingStatus) {
+					clear_mini_playfield_frame(&players[self->target]);
+				} else {
+					draw_mini_playfield_frame(&players[self->target]);
+				}
+				frameBlinkingStatus = !frameBlinkingStatus;
+				frameBlinkingTimer = 0;
+			}
+			frameBlinkingTimer++;
 		break;
 		case MultiPlayerGameOver:
 			switch (inputStatus) {
@@ -161,6 +179,7 @@ void RIT_IRQHandler (void)
 			}
 		break;
 		case OpeningPause:
+			start_song(0);
 			LCD_Clear(Black);
 			GUI_ExtraText(40, 15, (uint8_t*)"PAUSE", 4, White, Black);
 			reset_selection(&pauseMenu);
@@ -174,6 +193,7 @@ void RIT_IRQHandler (void)
 			manage_option_input(&pauseMenu);
 		break;
 		case ClosingPause:
+			resume_song(musicTheme);
 			LCD_Clear(Black);
 			draw_playfield(self->playfield);
 			draw_background_next();
@@ -181,10 +201,46 @@ void RIT_IRQHandler (void)
 			draw_piece(&nextPiece, Next);
 			gameStatus = SinglePlayer;
 		break;
+		case OpeningSettings:
+			LCD_Clear(Black);
+			GUI_ExtraText(24, 25, (uint8_t*)"SETTINGS", 3, White, Black);
+			reset_selection(&settingsMenu);
+			draw_option_screen(&settingsMenu);
+			gameStatus = Settings;
+		break;
+		case Settings:
+			if (inputStatus == INT0) {
+				gameStatus = LoadingMainMenu;
+			}
+			manage_option_input(&settingsMenu);
+		break;
+		case OpeningControls:
+			LCD_Clear(Black);
+			GUI_ExtraText(24, 12, (uint8_t*)"CONTROLS", 3, White, Black);
+			draw_option_screen(&controlsMenu);
+			gameStatus = Controls;
+		break;
+		case Controls:
+			if (inputStatus != NONE ) {
+				gameStatus = LoadingMainMenu;
+			}
+		break;
+		case OpeningCredits:
+			LCD_Clear(Black);
+			GUI_ExtraText(64, 20, (uint8_t*)"CREDITS", 2, White, Black);
+			draw_option_screen(&creditsMenu);
+			gameStatus = Credits;
+		break;
+		case Credits:
+			if (inputStatus != NONE ) {
+				gameStatus = LoadingMainMenu;
+			}
+		break;
 		default:
 		break;
 	}
 	inputStatus = NONE;
+	audio_engine();
 	
 	LPC_RIT->RICTRL |= 0x1;	/* clear interrupt flag */
 }

@@ -289,7 +289,7 @@
 #define USBCLKCFG_Val         0x00000000
 #define PCLKSEL0_Val          0x00000000
 #define PCLKSEL1_Val          0x00000000
-#define PCONP_Val             0x04E9E7DE
+#define PCONP_Val             0x04E9F7DE
 #define CLKOUTCFG_Val         0x00000000
 
 

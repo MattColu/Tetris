@@ -8,7 +8,7 @@
 #define BLOCK_SIZE 15
 #define PALETTE_SIZE 5
 #define PALETTE_NUMBER 9
-#define BG_NUMBER 5
+#define BG_NUMBER 7
 
 #define NEXT_BG_SIZE_X 3
 #define NEXT_BG_SIZE_Y 4
@@ -23,7 +23,7 @@
 #define MENU_OFFSET_Y 60
 
 #define CONSOLE_OFFSET_X 20
-#define CONSOLE_OFFSET_Y 20
+#define CONSOLE_OFFSET_Y 177
 
 #define MINI_PLAYFIELD_OFFSET_X 170
 #define MINI_PLAYFIELD_OFFSET_Y 180
@@ -82,6 +82,9 @@ extern uint8_t bgPalette;
 extern uint8_t garbagePalette;
 
 extern uint8_t frameThickness;
+extern uint8_t frameBlinkingStatus;
+extern uint8_t frameBlinkingTimer;
+extern uint8_t frameBlinkingSpeed;
 
 extern optioncontrol ValueCtrl;
 extern optioncontrol SwatchCtrl;
@@ -92,6 +95,10 @@ extern optioncontrol ButtonCtrl;
 
 extern choiceScreen pauseMenu;
 extern choiceScreen mainMenu;
+extern choiceScreen settingsMenu;
+extern choiceScreen controlsMenu;
+extern choiceScreen creditsMenu;
+extern choiceScreen lobbyMenu;
 
 extern selection menuSelection;
 
@@ -103,6 +110,7 @@ void draw_playfield_frame(uint16_t color);
 void configure_mini_playfields(void);
 void draw_mini_playfield(player *p);
 void draw_mini_playfield_frame(player *p);
+void clear_mini_playfield_frame(player *p);
 void draw_all_mini_playfields(void);
 void ko_mini_playfield(player *p);
 

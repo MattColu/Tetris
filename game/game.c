@@ -1,5 +1,6 @@
 #include "game.h"
 #include "gamegfx.h"
+#include "music.h"
 
 status gameStatus;
 input inputStatus;
@@ -32,15 +33,68 @@ menuEntry pauseOptions[PAUSE_OPTION_NUMBER] = {
 	{"Background style", &BgSwatchCtrl, &bgType, 0, BG_NUMBER},
 	{"Background color", &SwatchCtrl, &bgPalette, 0, PALETTE_NUMBER},
 	{"Enable ghost piece", &OnOffCtrl, &ghostEnabled, 0, 1},
+	{"Main volume", &ValueCtrl, &masterVolume, 0, 101},
 	{"Quit", &ButtonCtrl, &gameStatus, 0, LoadingMainMenu},
+};
+
+menuEntry settingOptions[SETTINGS_OPTION_NUMBER] = {
+	{"Background style", &BgSwatchCtrl, &bgType, 0, BG_NUMBER},
+	{"Background color", &SwatchCtrl, &bgPalette, 0, PALETTE_NUMBER},
+	{"Enable ghost piece", &OnOffCtrl, &ghostEnabled, 0, 1},
+	{"Main volume", &ValueCtrl, &masterVolume, 0, 101},
+	{"Music theme", &ValueCtrl, &musicTheme, 0, 3},
+	{"Back to Main Menu", &ButtonCtrl, &gameStatus, 0, LoadingMainMenu},
 };
 
 menuEntry mainMenuOptions[MAIN_MENU_OPTION_NUMBER] = {
 	{"Singleplayer", &ButtonCtrl, &gameStatus, 0, LoadingSinglePlayer},
 	{"Multiplayer", &ButtonCtrl, &gameStatus, 0, OpeningLobby},
-	{"Settings", &ButtonCtrl, &gameStatus, 0, Settings},
-	{"Controls", &ButtonCtrl, &gameStatus, 0, Controls},
-	{"Credits", &ButtonCtrl, &gameStatus, 0, Credits},
+	{"Settings", &ButtonCtrl, &gameStatus, 0, OpeningSettings},
+	{"Controls", &ButtonCtrl, &gameStatus, 0, OpeningControls},
+	{"Credits", &ButtonCtrl, &gameStatus, 0, OpeningCredits},
+};
+
+menuEntry controlsOptions[CONTROLS_OPTION_NUMBER] = {
+	{" ", &JustLabelCtrl, NULL, 0, 0},
+	{"Move Piece*       \x8C\x8E\x8F\x8D", &JustLabelCtrl, NULL, 0, 0},
+	{"Fast Drop*         \x8E\x8F\x8B", &JustLabelCtrl, NULL, 0, 0},
+	{"Instant Drop        \x90\x91", &JustLabelCtrl, NULL, 0, 0},
+	{"Rotate Piece        \x84\x85", &JustLabelCtrl, NULL, 0, 0},
+	{"Hold Piece          \x86\x87", &JustLabelCtrl, NULL, 0, 0},
+	{"(SingleP)Options    \x88\x89", &JustLabelCtrl, NULL, 0, 0},
+	{"(MultiP)Next Target \x88\x89", &JustLabelCtrl, NULL, 0, 0},
+	{" ", &JustLabelCtrl, NULL, 0, 0},
+	{"Menu Navigate       \x8E\x8F", &JustLabelCtrl, NULL, 0, 0},
+	{"Menu Accept      \x84\x85/\x90\x91", &JustLabelCtrl, NULL, 0, 0},
+	{"Menu Back           \x88\x89", &JustLabelCtrl, NULL, 0, 0},
+	{" ", &JustLabelCtrl, NULL, 0, 0},
+	{"* Tip: You can hold \x8E\x8F", &JustLabelCtrl, NULL, 0, 0},
+};
+
+menuEntry creditsOptions[CREDITS_OPTION_NUMBER] = {
+	{"This was created as", &JustLabelCtrl, NULL, 0, 0},
+	{"Special Project for", &JustLabelCtrl, NULL, 0, 0},
+	{"the ASE 2021/2022", &JustLabelCtrl, NULL, 0, 0},
+	{"course, held by", &JustLabelCtrl, NULL, 0, 0},
+	{"Prof. Paolo Bernardi.", &JustLabelCtrl, NULL, 0, 0},
+	{" ", &JustLabelCtrl, NULL, 0, 0},
+	{"TETRIS belongs to", &JustLabelCtrl, NULL, 0, 0 },
+	{"The Tetris Company", &JustLabelCtrl, NULL, 0, 0},
+	{"and I'm in no way", &JustLabelCtrl, NULL, 0, 0},
+	{"affiliated to it.", &JustLabelCtrl, NULL, 0, 0},
+	{" ", &JustLabelCtrl, NULL, 0, 0},
+	{"\x83 Matteo Colucci 2022", &JustLabelCtrl, NULL, 0, 0},
+};
+
+menuEntry lobbyOptions[LOBBY_OPTION_NUMBER] = {
+	{"Clear lines to send", &JustLabelCtrl, NULL, 0, 0},
+	{"garbage to an opponent", &JustLabelCtrl, NULL, 0, 0},
+	{"(cycle with \x88\x89)", &JustLabelCtrl, NULL, 0, 0},
+	{"1 cleared \x8D 0 garbage", &JustLabelCtrl, NULL, 0, 0},
+	{"2 cleared \x8D 1 garbage", &JustLabelCtrl, NULL, 0, 0},
+	{"3 cleared \x8D 2 garbage", &JustLabelCtrl, NULL, 0, 0},
+	{"4 cleared \x8D 4 garbage", &JustLabelCtrl, NULL, 0, 0},
+	{"Up to 7 people can play!", &JustLabelCtrl, NULL, 0, 0},
 };
 
 piece currentPiece;
@@ -382,6 +436,8 @@ void bag_piece(piece *bagged, piece *p, piece *next) {
 	bagged->y = baggedY;
 	bagged->oldX = baggedX;
 	bagged->oldY = baggedY;
+	bagged->rotation = 0;
+	bagged->oldRotation = 0;
 	return;
 }
 
@@ -566,6 +622,7 @@ void apply_garbage_line(uint8_t hole, player *p) {
 }
 
 void cycle_next_target(void) {
+	if (!frameBlinkingStatus) draw_mini_playfield_frame(&players[self->target]);
 	do {
 		self->target = (self->target + 1) % nPlayers;
 	} while (players[self->target].ko || self->target == self->id);

@@ -12,8 +12,13 @@
 #include "../led/led.h"
 #include "../GLCD/GLCD.h"
 #include "../can/s_can.h"
+#include "../game/music.h"
 
-
+uint16_t tDAC = 0;
+int16_t t0;
+int16_t t0old;
+int16_t t3;
+int16_t t3old;
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -23,69 +28,29 @@
 ** Returned value:		None
 **
 ******************************************************************************/
-#define N 10
-
-/* k=1/f'*f/n  k=f/(f'*n) k=25MHz/(f'*45) */
-
-//const int freqs[8]={4240,3779,3367,3175,2834,2525,2249,2120};
-/* 
-131Hz		k=4240 C3
-147Hz		k=3779
-165Hz		k=3367
-175Hz		k=3175
-196Hz		k=2834		
-220Hz		k=2525
-247Hz		k=2249
-262Hz		k=2120 C4
-*/
-
-const int freqs[8]={2120,1890,1684,1592,1417,1263,1125,1062};
-/*
-262Hz	k=2120		c4
-294Hz	k=1890		
-330Hz	k=1684		
-349Hz	k=1592		
-392Hz	k=1417		
-440Hz	k=1263		
-494Hz	k=1125		
-523Hz	k=1062		c5
-
-*/
-
-uint16_t SinTable[45] =                                       /* ÕýÏÒ±í                       */
-{
-    410, 467, 523, 576, 627, 673, 714, 749, 778,
-    799, 813, 819, 817, 807, 789, 764, 732, 694, 
-    650, 602, 550, 495, 438, 381, 324, 270, 217,
-    169, 125, 87 , 55 , 30 , 12 , 2  , 0  , 6  ,   
-    20 , 41 , 70 , 105, 146, 193, 243, 297, 353
-};
-
-int seq4beats[3][N]={{0,8,7,8,8,8,8,8,8,8},
-										 {0,8,3,8,6,8,5,8,7,8},
-										 {0,0,0,8,8,0,0,0,8,8}};
-/* contains sequence of notes from c4 to C5 */
-/* position of c4 = 0 to C5 - 7 in the freq const vect ADC */ 
-/* position 8 is an artifact to include a pause of 1/4 beat */	
-	
-int play;
-/* current status of sound (on/off) */
-
-int blink_mask = 0xFF;
-
-extern int check;
 
 void TIMER0_IRQHandler (void)
 {
-	static int ticks=0;
-	/* DAC management */	
-	LPC_DAC->DACR = (SinTable[ticks]/3)<<6;
-	ticks++;
-	if(ticks==45) ticks=0;
+	t0 = generate_sound(0);
+	tDAC = tDAC - t0old + t0;
+	t0old = t0;
+	LPC_DAC->DACR = tDAC << 6;
 	
-  LPC_TIM0->IR = 1;			/* clear interrupt flag */
-  return;
+	LPC_TIM0->IR = 1;			/* clear interrupt flag */
+	return;
 }
+
+void TIMER3_IRQHandler (void)
+{
+	t3 = generate_sound(1);
+	tDAC = tDAC - t3old + t3;
+	t3old = t3;
+	LPC_DAC->DACR = tDAC << 6;
+	
+	LPC_TIM3->IR = 1;			/* clear interrupt flag */
+	return;
+}
+
 
 
 /******************************************************************************
@@ -308,18 +273,6 @@ void TIMER2_IRQHandler (void) {
 		break;
 	}
   LPC_TIM2->IR = 1;			/* clear interrupt flag */
-  return;
-}
-
-
-void TIMER3_IRQHandler (void)
-{
-	/*
-	check=2;
-	song=2;
-	note=0;
-	enable_timer(1);	*/
-	LPC_TIM3->IR = 1;			/* clear interrupt flag */
   return;
 }
 
