@@ -97,6 +97,7 @@ void CAN_IRQHandler(){
 					case IDGrant:									//Shouldn't happen, will pretend i didn't see anything
 					break;
 					default:
+						if (scanData.dst == SCAN_BROADCAST) CAN_Send(LPC_CAN1, &data);
 						SCANMsgMgmt(&scanData);
 					break;
 				}
